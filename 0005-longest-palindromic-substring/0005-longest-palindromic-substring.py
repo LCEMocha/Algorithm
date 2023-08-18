@@ -9,10 +9,10 @@ class Solution(object):
         
         #해당사항이 없을 때 빠르게 리턴
         if len(s) < 2 or s == s[::-1]:
-            return s
-        result = ''
+            return s        
         
         #슬라이딩 윈도우 우측으로 이동
+        result = ''
         for i in range(len(s)-1):
             result = max(result,
                         expand(i, i+1), expand(i, i+2), key=len)
