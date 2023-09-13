@@ -1,16 +1,16 @@
 class Solution(object):
     def removeDuplicateLetters(self, s):
-        stack = []
-        seen = set()
-        last_occurrence = {c: i for i, c in enumerate(s)}
-
-        for i, c in enumerate(s):
-            if c not in seen:
-                # 스택의 마지막 문자가 현재 문자보다 사전 순서에서 뒤에 있고,
-                # 현재 문자 뒤에 해당 문자가 더 있으면 스택에서 제거
-                while stack and c < stack[-1] and i < last_occurrence[stack[-1]]:
-                    seen.discard(stack.pop())
-                seen.add(c)
-                stack.append(c)
-
+        counter, seen, stack = collections.Counter(s), set(), []
+        
+        for char in s:
+            counter[char] -= 1
+            if char in seen:
+                continue
+            
+            #뒤에 붙일 문자가 남아있다면 스택에서 제거
+            while stack and char < stack[-1] and counter[stack[-1]] > 0:
+                seen.remove(stack.pop())
+            stack.append(char)
+            seen.add(char)
+            
         return ''.join(stack)
