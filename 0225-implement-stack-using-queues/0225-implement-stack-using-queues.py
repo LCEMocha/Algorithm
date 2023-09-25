@@ -5,7 +5,8 @@ class MyStack:
 
     def push(self, x: int) -> None:
         self.q.append(x)
-        self.q.rotate(1)
+        first_element = self.q.pop()
+        self.q.insert(0, first_element)
 
     def pop(self) -> int:
         return self.q.popleft()
