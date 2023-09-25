@@ -5,13 +5,14 @@ class MyStack:
 
     def push(self, x: int) -> None:
         self.q.append(x)
+        self.q.rotate(1)
 
     def pop(self) -> int:
-        return self.q.pop()
+        return self.q.popleft()
         
 
     def top(self) -> int:
-        return self.q[-1]
+        return self.q[0]
         
 
     def empty(self) -> bool:
