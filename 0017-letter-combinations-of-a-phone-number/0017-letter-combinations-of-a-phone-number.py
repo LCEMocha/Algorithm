@@ -9,6 +9,10 @@ class Solution:
               '5':['j','k','l'], '6':['m','n','o'], '7':['p','q','r','s'],
               '8':['t','u','v'], '9':['w','x','y','z']}
         
-        lookup = [dic[digit] for digit in digits] 
-        answer = [''.join(combination) for combination in itertools.product(*lookup)]
-        return answer
+        # digits의 각 숫자에 해당하는 문자 리스트를 lookup
+        lookup = [dic[digit] for digit in digits]
+        
+        # product를 사용해 모든 조합 구하기
+        combinations = [''.join(combination) for combination in itertools.product(*lookup)]
+        
+        return combinations
