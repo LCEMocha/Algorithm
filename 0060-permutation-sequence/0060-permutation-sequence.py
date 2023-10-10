@@ -5,5 +5,4 @@ class Solution:
         for i in range(n):
             li.append(i+1)
         result = list(permutations(li,n))
-        result = ''.join(map(str,result[k-1]))
-        return result
+        return ''.join(map(str,result[k-1]))
