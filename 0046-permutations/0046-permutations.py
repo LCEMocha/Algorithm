@@ -1,4 +1,3 @@
-
 class Solution:
     def permute(self, nums: List[int]) -> List[List[int]]:
         nums.sort()  # 중복 처리를 위해 먼저 정렬
