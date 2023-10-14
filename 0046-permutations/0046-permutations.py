@@ -1,6 +1,6 @@
 
 class Solution:        
-    def permutations(iterable, r=None):
+    def per(self, iterable, r=None):
         # 입력된 데이터를 튜플 형태로 변환
         pool = tuple(iterable)
         n = len(pool)
@@ -41,4 +41,4 @@ class Solution:
                 return
             
     def permute(self, nums: List[int]) -> List[List[int]]:
-        return permutations(nums)
+        return list(self.per(nums))
