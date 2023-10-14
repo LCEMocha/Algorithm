@@ -1,12 +1,12 @@
 class Solution:
     def permutation(self, data):
-        if len(nums) == 1:
-            yield nums
+        if len(data) == 1:
+            yield data
         else:
-            for i in range(len(nums)):
-                rest = nums[:i] + nums[i+1:]
+            for i in range(len(data)):
+                rest = data[:i] + data[i+1:]
                 for p in self.permutation(rest):
-                    yield [nums[i]] + p
+                    yield [data[i]] + p
     
     def getPermutation(self, n: int, k: int) -> str:
         iterable = []
