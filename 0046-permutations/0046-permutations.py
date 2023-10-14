@@ -20,4 +20,6 @@ class Solution:
                 i += 1
             
     def permute(self, nums: List[int]) -> List[List[int]]:
-        return list(self.permutation(nums))
+        result = list(self.permutation(nums))
+        result.sort()
+        return result
