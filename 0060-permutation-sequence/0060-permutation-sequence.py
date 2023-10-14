@@ -5,7 +5,7 @@ class Solution:
         else:
             for i in range(len(nums)):
                 rest = nums[:i] + nums[i+1:]
-                for p in permutation(rest):
+                for p in self.permutation(rest):
                     yield [nums[i]] + p
     
     def getPermutation(self, n: int, k: int) -> str:
