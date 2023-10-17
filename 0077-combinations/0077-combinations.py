@@ -1,27 +1,17 @@
-from itertools import combinations
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
-        return list(self.combi(range(1,n+1), k))
+        results = []
         
-    def combi(self, iterable, r):
-        pool = tuple(iterable)
-        l = len(pool)
-
-        if r > l:
-            return
-
-        indices = list(range(r))
-        yield tuple(pool[i] for i in indices)
-
-        while True:
-            for i in reversed(range(r)):
-                if indices[i] != i + l - r:
-                    break
-            else:
+        def dfs(elements, start, k):
+            if k == 0:
+                results.append(elements[:])
                 return
-
-            indices[i] += 1
-            for j in range(i + 1, r):
-                indices[j] = indices[j-1] + 1
-
-            yield tuple(pool[i] for i in indices)
+            
+            # 자신 이전의 모든 값을 고정하여 재귀 호출
+            for i in range(start, n+1):
+                elements.append(i)
+                dfs(elements, i+1, k-1)
+                elements.pop()
+            
+        dfs([], 1, k)
+        return results
