@@ -1,20 +1,17 @@
 
 class Solution:
     def findItinerary(self, tickets: List[List[str]]) -> List[str]:
-        graph = collections.defaultdict(list)
+        k = 'JFK'
+        ticket_dic = collections.defaultdict(list)
+        for key, value in sorted(tickets):
+            ticket_dic[key].append(value)
+        results = []
         
-        for a,b in sorted(tickets):
-            graph[a].append(b)
-            
-        route = []
-        def dfs(a):
-            while graph[a]:
-                dfs(graph[a].pop(0))
-            route.append(a)
-            
-        dfs('JFK')
-        return route[::-1]
-                
-                
-                
-                
+        def dfs(k):
+            while ticket_dic[k]:
+                next_stop = ticket_dic[k].pop(0)                
+                dfs(next_stop)
+            results.append(k)
+        
+        dfs(k)
+        return results[::-1]
