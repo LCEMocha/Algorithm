@@ -9,28 +9,22 @@ class Solution:
         self.longest = 0
 
     def longestUnivaluePath(self, root: Optional[TreeNode]) -> int:
-        def dfs(node):
-            if node is None:
+        def dfs(node, parent_val):
+            if not node:
                 return 0
-            
-            # 존재하지 않는 노드까지 DFS 재귀 탐색
-            left = dfs(node.left)
-            right = dfs(node.right)
-            
-            # 현재 노드가 자식 노드와 동일한 경우 거리 1증가
-            if node.left and node.left.val == node.val:
-                left += 1
-            else:
-                left = 0
-            if node.right and node.right.val == node.val:
-                right += 1
-            else:
-                right = 0
-                
-            # 왼쪽과 오른쪽 자식 노드 간 거리의 합 최댓값이 결과
-            self.longest = max(self.longest, left+right)
-            # 자식 노드 상태값 중 큰 값 리턴
-            return max(left, right)
-    
-        dfs(root)
+
+            left_len = dfs(node.left, node.val)
+            right_len = dfs(node.right, node.val)
+
+            self.longest = max(self.longest, left_len + right_len)
+
+            # 현재 노드의 값이 부모 노드의 값과 같은 경우,
+            # 왼쪽 또는 오른쪽 자식 중 긴 경로를 선택하고 현재 노드를 포함(길이 +1).
+            if node.val == parent_val:
+                return max(left_len, right_len) + 1
+
+            # 현재 노드의 값이 부모 노드의 값과 다른 경우, 새 경로를 시작해야 하므로 0을 반환합니다.
+            return 0
+
+        dfs(root, None)
         return self.longest
