@@ -1,3 +1,5 @@
+# 다른 가지치기 방식
+
 # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -5,13 +7,15 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    sum = 0
     def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
-        if root:
-            if low <= root.val <= high:
-                self.sum += root.val
-            self.rangeSumBST(root.left, low, high)
-            self.rangeSumBST(root.right, low, high)
-        return self.sum
-
+        def dfs(node: TreeNode):
+            if not node:
+                return 0
+            
+            if node.val < low:
+            	return dfs(node.right)
+            if node.val > high:
+            	return dfs(node.left)
+            return node.val + dfs(node.left) + dfs(node.right)
         
+        return dfs(root)
