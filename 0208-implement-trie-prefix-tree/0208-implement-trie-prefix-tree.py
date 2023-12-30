@@ -3,7 +3,7 @@ class TrieNode:
 
     def __init__(self):
         self.word = False
-        self.children = {}
+        self.children = collections.defaultdict(TrieNode)
 
 # 트라이 연산 클래스
 class Trie:
@@ -14,8 +14,6 @@ class Trie:
     def insert(self, word: str) -> None:
         node = self.root
         for char in word:
-            if char not in node.children:
-                node.children[char] = TrieNode()
             node = node.children[char]
         node.word = True
 
