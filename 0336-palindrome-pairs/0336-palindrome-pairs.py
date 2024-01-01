@@ -8,8 +8,7 @@ class Trie:
     def __init__(self):
         self.root = TrieNode()  # 트라이의 루트 노드
     
-    @staticmethod
-    def is_palindrome(word):
+    def is_palindrome(self, word):
         # 주어진 단어가 팰린드롬인지 확인하는 함수
         return word == word[::-1]
     
