@@ -1,12 +1,15 @@
-class Solution(object):
-    def maxProfit(self, prices):
-        profit = 0
-        min_price = sys.maxsize
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        low = sys.maxsize
+        high = 0
+        price = 0
         
-        #최솟값과 최댓값을 계속 갱신
-        for price in prices:
-            min_price = min(min_price, price)
-            profit = max(profit, price - min_price)
-            
-        return profit
-            
+        if prices == sorted(prices, reverse = True):
+            return 0
+        
+        for i in range(len(prices)-1):
+            if prices[i] < low and prices[i] < prices[i+1]:
+                low = prices[i]
+                high = max(x for x in prices[i:] if x > low)
+                price = max(price, high-low)
+        return price
