@@ -1,16 +1,21 @@
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        counts = collections.Counter()
-        left = right = 0
-        for right in range(1, len(s)+1):
-            counts[s[right-1]] += 1
+        hasho = {}
+        most_frequent = 0
+        start = 0
+        max_len = 0
+
+        for end, char in enumerate(s):
             
-            # 가장 흔한 문자
-            max_char_n = counts.most_common(1)[0][1]
+            hasho[char] = hasho.get(char, 0) + 1 
             
-            # k초과시 왼쪽 포인터 이동
-            if right - left - max_char_n > k:
-                counts[s[left]] -= 1
-                left += 1
-        return right-left
+            most_frequent = max(most_frequent, hasho[char])
+            # (end - start + 1) --> window size 
+            if (end - start + 1) - most_frequent > k:
+                hasho[s[start]] -= 1
+                start += 1
+            
+            max_len = max(max_len, end-start+1)
+        
+        return max_len
         
