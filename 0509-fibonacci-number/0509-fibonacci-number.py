@@ -1,12 +1,16 @@
 class Solution:
     def fib(self, n: int) -> int:
-        dic = {0:0, 1:1}
+        dp = collections.defaultdict(int)
         
         def fib2(i):
-            if i not in dic:
-                dic[i] = fib2(i-1) + fib2(i-2)  
-            return dic[i]
+            dp[0] = 0
+            dp[1] = 1
+            
+            for i in range(2, i+1):
+                dp[i] = dp[i-1] + dp[i-2]
+            
+            return dp[i]
         
-        return fib2(n)     
+        return fib2(n)
         
         
