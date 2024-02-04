@@ -1,15 +1,15 @@
 class Solution:
     def fib(self, n: int) -> int:
-        dic = {0:0, 1:1}
+        dp = collections.defaultdict(int)
         
         def fib2(i):
-            if i in dic:
-                return dic[i]
-            return fib2(i-1) + fib2(i-2)
-        
-        if n not in dic:
-            dic[n] = fib2(n)
-        
+            if i <= 1:
+                return i
+            
+            if dp[i]:
+                return dp[i]
+            dp[i] = fib2(i-1) + fib2(i-2)
+            return dp[i]
         
         return fib2(n)
         
