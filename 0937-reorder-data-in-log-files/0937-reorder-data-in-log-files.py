@@ -1,11 +1,15 @@
-class Solution(object):
-    def reorderLogFiles(self, logs):
-        letters, digits = [], []
-        for log in logs:
-            if log.split()[1].isdigit():
-                digits.append(log)
+class Solution:
+    def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        dig = []
+        let = []
+    
+        for i in logs:
+            if i.split()[1].isdigit():
+                dig.append(i)
             else:
-                letters.append(log)
-                
-        letters.sort(key=lambda x: (x.split()[1:], x.split()[0]))
-        return letters+digits
+                let.append(i)
+            
+        let.sort(key=lambda x:(x.split()[1:], x.split()[0]))
+        #dig.sort(key=lambda x:(x.split()[1:], x.split()[0]), reverse=True)
+        
+        return(let+dig)
