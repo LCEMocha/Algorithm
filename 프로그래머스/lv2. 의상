@@ -1,0 +1,22 @@
+import collections
+
+def solution(clothes):
+    dic = collections.defaultdict(list)
+    len_of_dics = []
+    
+    for c in clothes:
+        dic[c[1]].append(c[0])
+    
+    for k,v in dic.items():
+        len_of_dics.append(len(v))
+        
+    return calculate_combinations(len_of_dics)
+    
+    
+def calculate_combinations(len_of_dics):
+    total_combinations = 1
+    for length in len_of_dics:
+        total_combinations *= (length + 1)
+    
+    # 아무것도 입지 않는 경우를 제외하고 반환
+    return total_combinations - 1
