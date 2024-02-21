@@ -1,0 +1,23 @@
+import collections
+
+def solution(genres, plays):
+    dic = collections.defaultdict(list)
+    for i in range(len(genres)):
+        dic[genres[i]].append([plays[i], i])
+
+    sum_genr = []
+    for key, value in dic.items():
+        sum_values = sum(item[0] for item in value)  # 첫 번째 원소들의 합계
+        sum_genr.append([key, sum_values])
+    sum_genr.sort(key=lambda x: x[1], reverse=True)
+    
+    # 정렬
+    for key in dic.keys():
+        dic[key].sort(key=lambda x: (x[0], -x[1]), reverse=True)
+    
+    answer = []
+    for i in range(len(sum_genr)):
+        genre_list = dic[sum_genr[i][0]]
+        for j in range(min(2, len(genre_list))):  # 장르별 곡이 2개 이하인 경우를 고려
+            answer.append(genre_list[j][1])
+    return answer
