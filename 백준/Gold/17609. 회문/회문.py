@@ -1,29 +1,21 @@
 import sys
-#from collections import deque
-#import heapq
-
 input = sys.stdin.readline
 
-# n, k = map(int, input().split())
 N = int(input().strip())
-words = []
 
 for _ in range(N):
-    words.append(str(input().strip()))
-
-def is_palindrome(left_point, right_point, w):
-    while left_point < right_point and w[left_point] == w[right_point]:
-        #print(w, w[left_point], w[right_point])
-        left_point += 1
-        right_point -= 1
-    if left_point == right_point or right_point < left_point:
-        return 0
-    else:
-        return 1, left_point, right_point
-
-for w in words:
+    w = str(input().strip())
     left_point = 0
-    right_point = len(w)-1
+    right_point = len(w) - 1
+
+    def is_palindrome(left_point, right_point, w):
+        while left_point < right_point and w[left_point] == w[right_point]:
+            left_point += 1
+            right_point -= 1
+        if left_point == right_point or right_point < left_point:
+            return 0
+        else:
+            return 1, left_point, right_point
 
     result = is_palindrome(left_point, right_point, w)
     if result == 0:
